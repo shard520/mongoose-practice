@@ -8,12 +8,15 @@ const movieSchema = new mongoose.Schema({
   },
   actor: {
     type: String,
+    default: 'Not specified',
   },
   genre: {
     type: String,
+    default: 'Not specified',
   },
   rating: {
     type: Number,
+    max: 10,
   },
 });
 
