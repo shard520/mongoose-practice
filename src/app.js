@@ -43,6 +43,10 @@ const app = () => {
       isUndefined
     );
     findMovies(searchQuery);
+  } else if (process.argv[2] === 'minRating') {
+    findMovies({ rating: { $gte: yargs.argv.rating } });
+  } else {
+    console.log('Incorrect command');
   }
 };
 

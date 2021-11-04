@@ -52,9 +52,18 @@ exports.deleteMovie = async movieObj => {
 
 exports.findMovies = async searchQuery => {
   try {
-    const results = await Movie.find(searchQuery);
+    const searchResults = await Movie.find(searchQuery);
     mongoose.disconnect();
-    console.log(results);
+    if (searchResults.length > 0) {
+      console.log(
+        `${searchResults.length} movie${
+          searchResults.length > 1 ? 's' : ''
+        } found that match your search`,
+        searchResults
+      );
+    } else {
+      console.log('No movies found that matched your search.');
+    }
   } catch (err) {
     console.error(err);
   }

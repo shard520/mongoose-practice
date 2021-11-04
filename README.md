@@ -57,3 +57,9 @@ To search for movies, specify the required search terms, eg to search for all ac
 Or to search for all sci-fi movies:
 
 `node src/app.js "search" --genre="Sci-fi"`
+
+---
+
+To find movies with a minimum rating:
+
+`node src/app.js "minRating" --rating=7`
