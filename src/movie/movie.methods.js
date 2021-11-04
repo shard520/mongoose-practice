@@ -21,3 +21,41 @@ exports.listMovies = async () => {
     console.error(err);
   }
 };
+
+exports.updateMovie = async (oldEntry, newEntry) => {
+  try {
+    const updatedMovie = await Movie.updateOne(oldEntry, newEntry);
+    mongoose.disconnect();
+    if (updatedMovie.modifiedCount === 1) {
+      console.log('Movie successfully updated');
+    } else {
+      console.log('Update unsuccessful, please try again.');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+exports.deleteMovie = async movieObj => {
+  try {
+    const deletedMovie = await Movie.deleteOne(movieObj);
+    mongoose.disconnect();
+    if (deletedMovie.deletedCount === 1) {
+      console.log('Movie deleted successfully');
+    } else {
+      console.log('Delete operation unsuccessful, please try again.');
+    }
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+exports.findMovies = async searchQuery => {
+  try {
+    const results = await Movie.find(searchQuery);
+    mongoose.disconnect();
+    console.log(results);
+  } catch (err) {
+    console.error(err);
+  }
+};
