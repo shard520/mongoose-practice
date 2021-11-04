@@ -11,3 +11,13 @@ exports.addMovie = async movieObj => {
     console.error(err);
   }
 };
+
+exports.listMovies = async () => {
+  try {
+    const movieList = await Movie.find({});
+    mongoose.disconnect();
+    movieList.forEach(movie => console.log(movie));
+  } catch (err) {
+    console.error(err);
+  }
+};
