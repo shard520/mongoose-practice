@@ -1,11 +1,11 @@
-const mongoose = require('mongoose');
+const { disconnect } = require('mongoose');
 const Movie = require('./movie.model');
 
 exports.addMovie = async movieObj => {
   try {
     const movie = new Movie(movieObj);
     await movie.save();
-    mongoose.disconnect();
+    disconnect();
     console.log('Movie successfully added to the DB.');
   } catch (err) {
     console.error(err);
@@ -15,7 +15,7 @@ exports.addMovie = async movieObj => {
 exports.listMovies = async () => {
   try {
     const movieList = await Movie.find({});
-    mongoose.disconnect();
+    disconnect();
     movieList.forEach(movie => console.log(movie));
   } catch (err) {
     console.error(err);
@@ -25,7 +25,7 @@ exports.listMovies = async () => {
 exports.updateMovie = async (oldEntry, newEntry) => {
   try {
     const updatedMovie = await Movie.updateOne(oldEntry, newEntry);
-    mongoose.disconnect();
+    disconnect();
     if (updatedMovie.modifiedCount === 1) {
       console.log('Movie successfully updated');
     } else {
@@ -39,7 +39,7 @@ exports.updateMovie = async (oldEntry, newEntry) => {
 exports.deleteMovie = async movieObj => {
   try {
     const deletedMovie = await Movie.deleteOne(movieObj);
-    mongoose.disconnect();
+    disconnect();
     if (deletedMovie.deletedCount === 1) {
       console.log('Movie deleted successfully');
     } else {
@@ -53,7 +53,7 @@ exports.deleteMovie = async movieObj => {
 exports.findMovies = async searchQuery => {
   try {
     const searchResults = await Movie.find(searchQuery);
-    mongoose.disconnect();
+    disconnect();
     if (searchResults.length > 0) {
       console.log(
         `${searchResults.length} movie${
